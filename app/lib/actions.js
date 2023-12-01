@@ -174,7 +174,7 @@ export const loginUser = async (formData) => {
     if (!isCorrectPass) throw new Error("password-is-wrong");
     const salt = await genSalt(12)
     const hashedId = await hash(user.id,salt)
-    setCookie("TOKEN", hashedId, { maxAge:7200,domain:'localhost',cookies });
+    setCookie("TOKEN", hashedId, { maxAge:7200,domain:'dashboard-puce-kappa.vercel.app',cookies });
     return JSON.stringify(user);
   } catch (error) {
     return { error: error.message };
