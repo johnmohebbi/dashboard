@@ -1,5 +1,5 @@
 import { addUser } from "@/app/lib/actions";
-import styles from "../../../ui/dashboard/Users/addUser/addUser.module.css";
+import styles from "../../../ui/dashboard/users/addUser/addUser.module.css";
 const Add = () => {
   return (
     <div className={styles.container}>
