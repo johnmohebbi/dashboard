@@ -1,95 +1,80 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Box from "./ui/home/box/Box";
+import styles from "./page.module.css";
+import Link from "next/link";
+//icons
+import { PiTelegramLogo } from "react-icons/pi";
+import { LuCircleDollarSign } from "react-icons/lu";
+import { BsRocket } from "react-icons/bs";
+import { TfiWrite } from "react-icons/tfi";
+import { FaOpencart } from "react-icons/fa";
+import { ImMagicWand } from "react-icons/im";
+import AboutusContent from "./ui/home/content/AboutusContent";
+import Collapse from "./ui/home/collapse/Collapse";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <div className={styles.navContainer}>
+        <nav className={styles.nav}>
+          <div className={styles.logo}>
+            <h2>Logo</h2>
+          </div>
+          <div className={styles.dashboardLinkContainer}>
+            <Link href={`/dashboard`}>dashboard</Link>
+          </div>
+        </nav>
+      </div>
+      <div className={styles.mainTitleContainer}>
+        <div className={styles.mainTitle}>
+          <h1>MARKETING</h1>
+          <h1>SOLUTION AGENCY</h1>
+          <p>
+            Lorem ipsum dolor sit amet, mei melius verterem te, nec dicta
+            aliquam appellantur ei. Cum unum prima recusabo Lorem ipsum dolor
+            sit amet, mei melius verterem te, nec dicta
+          </p>
         </div>
       </div>
+      <section className={styles.boxContainer}>
+        <div className={styles.boxPot}>
+          <Box
+            c={styles.box}
+            icon={PiTelegramLogo}
+            title={"Digital Marketing"}
+          />
+          <Box c={styles.box} icon={LuCircleDollarSign} title={"Trade Shows"} />
+          <Box c={styles.box} icon={BsRocket} title={"Branding"} />
+          <Box c={styles.box} icon={TfiWrite} title={"Content Creation"} />
+          <Box c={styles.box} icon={ImMagicWand} title={"Graphic Design"} />
+          <Box c={styles.box} icon={FaOpencart} title={"Media Buying"} />
+        </div>
+      </section>
+      <AboutusContent />
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className={styles.collapsibleContainer}>
+        <Collapse title={"Digital Marketing"} />
+        <Collapse title={"Trade Shows"} />
+        <Collapse title={"Branding"} />
+        <Collapse title={"Content Creation"} />
+        <Collapse title={"Graphic Design"} />
+        <Collapse title={"Branding"} />
+        <Collapse title={"Media Buying"} />
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <section className={styles.boxContainer}>
+        <div className={styles.boxPot}>
+          <Box
+            c={styles.box}
+            icon={PiTelegramLogo}
+            title={"Digital Marketing"}
+          />
+          <Box c={styles.box} icon={TfiWrite} title={"Content Creation"} />
+          <Box c={styles.box} icon={FaOpencart} title={"Media Buying"} />
+        </div>
+      </section>
+      <footer className={styles.footerContainer}>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing tempor.</p>
+        <p>© dashboard Theme by <strong>john</strong></p>
+      </footer>
     </main>
-  )
+  );
 }
