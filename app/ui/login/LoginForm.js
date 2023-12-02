@@ -1,7 +1,7 @@
 "use client";
 import styles from "./login.module.css";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "@/app/lib/actions";
@@ -14,10 +14,12 @@ const LoginForm = () => {
   const submitHandler = async (formdata) => {
     const res = await loginUser(formdata);
     if (res?.error) {
-      console.log(res.error);
+      setIsError(true)
     } else {
+      setIsError(false)
       const user = JSON.parse(res);
       router.replace("/dashboard");
+      
     }
   };
   const changeHandler = async (e) => {

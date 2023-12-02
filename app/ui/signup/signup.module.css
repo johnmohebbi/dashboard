@@ -36,3 +36,7 @@
     cursor: pointer;
     border-radius: 5px;
   }
+  .form button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }

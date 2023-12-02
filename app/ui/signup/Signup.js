@@ -1,11 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./signup.module.css";
 import { addNewUser } from "@/app/lib/actions";
 import Link from "next/link";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BarLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
 const Signup = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const router = useRouter();
+  const button = useRef();
+  const [isError, setIsError] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const changeHandler = async (e) => {
     if (e.target.name === "username") {
@@ -27,15 +38,37 @@ const Signup = () => {
       }));
     }
   };
+  const submithandler = async (e) => {
+    <BarLoader color="#ff3700" />;
+    button.current.setAttribute("disabled", "disabled");
+    const res = await addNewUser(formData);
+    if (res === "username" || res === "email") {
+      const notify = () =>
+        toast.error(`enter correct info, please change your ${res}`);
+      notify();
+      setIsError(true);
+      button.current.removeAttribute("disabled");
+    } else {
+      const user = JSON.parse(res);
+      const notify = () => toast.success(`welcome ${user.username}`);
+      notify();
+      setCookie("TOKEN", user._id, {
+        maxAge: 7200,
+        domain: "dashboard-puce-kappa.vercel.app",
+      });
+      router.replace("/dashboard");
+    }
+  };
   return (
     <div className={styles.container}>
-      <form className={styles.form} action={addNewUser}>
+      <form className={styles.form} action={submithandler}>
         <h1>signup</h1>
         <input
           type="text"
           placeholder="username"
           name="username"
           value={formData.username}
+          required
           onChange={changeHandler}
         />
         <input
@@ -43,6 +76,7 @@ const Signup = () => {
           placeholder="email"
           name="email"
           value={formData.email}
+          required
           onChange={changeHandler}
         />
         <input
@@ -51,11 +85,28 @@ const Signup = () => {
           placeholder="password"
           name="password"
           value={formData.password}
+          required
           onChange={changeHandler}
         />
-        <button type="submit">register</button>
+        <button type="submit" ref={button}>
+          register
+        </button>
         <Link href={"/login"}>create account</Link>
       </form>
+      {isError && (
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      )}
     </div>
   );
 };
