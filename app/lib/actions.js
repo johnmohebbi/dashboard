@@ -32,7 +32,7 @@ export const addUser = async (formData) => {
   redirect("/dashboard/users");
 };
 export const addNewUser = async (formData) => {
-  const convertedToObject = formData
+  const convertedToObject = formData;
   try {
     const conection = await dbConnection();
     console.log("========= connected to db to create new user ========");
@@ -177,15 +177,23 @@ export const loginUser = async (formData) => {
     const isCorrectPass = await bcrypt.compare(password, user.password);
 
     if (!isCorrectPass) throw new Error("password-is-wrong");
-    const salt = await genSalt(12);
-    const hashedId = await hash(user.id, salt);
-    setCookie("TOKEN", hashedId, {
+    // const salt = await genSalt(12);
+    // const hashedId = await hash(user.id, salt);
+    setCookie("TOKEN", user.id, {
       maxAge: 7200,
-      domain: "dashboard-puce-kappa.vercel.app",
+      // domain: "dashboard-puce-kappa.vercel.app",
       cookies,
     });
     return JSON.stringify(user);
   } catch (error) {
     return { error: error.message };
   }
+};
+export const logOut = async (formDada) => {
+  setCookie("TOKEN", "", {
+    maxAge: -1,
+    // domain: "dashboard-puce-kappa.vercel.app",
+    cookies,
+  });
+  redirect("/login");
 };

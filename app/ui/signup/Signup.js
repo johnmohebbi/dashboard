@@ -39,7 +39,6 @@ const Signup = () => {
     }
   };
   const submithandler = async (e) => {
-    <BarLoader color="#ff3700" />;
     button.current.setAttribute("disabled", "disabled");
     const res = await addNewUser(formData);
     if (res === "username" || res === "email") {
@@ -56,7 +55,7 @@ const Signup = () => {
         maxAge: 7200,
         domain: "dashboard-puce-kappa.vercel.app",
       });
-      router.replace("/dashboard");
+        router.replace("/dashboard");
     }
   };
   return (

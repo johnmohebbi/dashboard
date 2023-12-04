@@ -1,7 +1,7 @@
 "use client";
 import styles from "./login.module.css";
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "@/app/lib/actions";
@@ -13,13 +13,14 @@ const LoginForm = () => {
   const router = useRouter();
   const submitHandler = async (formdata) => {
     const res = await loginUser(formdata);
-    if (res?.error) {
-      setIsError(true)
+    if (res.error) {
+      setIsError(true);
+      const notify = () => toast.error(res.error);
+      notify();
     } else {
-      setIsError(false)
+      setIsError(false);
       const user = JSON.parse(res);
       router.replace("/dashboard");
-      
     }
   };
   const changeHandler = async (e) => {
@@ -57,7 +58,7 @@ const LoginForm = () => {
           onChange={changeHandler}
           required
         />
-        <button type="submit" >Login</button>
+        <button type="submit">Login</button>
         <Link href={"/signup"}>create account</Link>
       </form>
       {isError && (

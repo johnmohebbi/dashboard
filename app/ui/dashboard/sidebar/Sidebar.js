@@ -2,12 +2,6 @@ import {
   MdDashboard,
   MdSupervisedUserCircle,
   MdShoppingBag,
-  MdAttachMoney,
-  MdWork,
-  MdAnalytics,
-  MdPeople,
-  MdOutlineSettings,
-  MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
 import MenuLink from "./MenuLink/MenuLink";
@@ -31,47 +25,12 @@ const menuItems = [
         title: "Products",
         path: "/dashboard/products",
         icon: <MdShoppingBag />,
-      }
-    ],
-  },
-  {
-    title: "Analytics",
-    list: [
-      {
-        title: "Revenue",
-        path: "/dashboard/revenue",
-        icon: <MdWork />,
-      },
-      {
-        title: "Reports",
-        path: "/dashboard/reports",
-        icon: <MdAnalytics />,
-      },
-      {
-        title: "Teams",
-        path: "/dashboard/teams",
-        icon: <MdPeople />,
-      },
-    ],
-  },
-  {
-    title: "User",
-    list: [
-      {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: <MdOutlineSettings />,
-      },
-      {
-        title: "Help",
-        path: "/dashboard/help",
-        icon: <MdHelpCenter />,
       },
     ],
   },
 ];
+import { logOut } from "@/app/lib/actions";
 const Sidebar = async () => {
-  
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -99,9 +58,7 @@ const Sidebar = async () => {
           );
         })}
       </ul>
-      <form
-        action=''
-      >
+      <form action={logOut}>
         <button type="submit" className={styles.logout}>
           <MdLogout />
           Logout
